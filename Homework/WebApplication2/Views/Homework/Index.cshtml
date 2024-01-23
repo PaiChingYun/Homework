@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div class="area">
+    
+</div>
+
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+    <script>
+        const area = document.querySelector(".area");
+        
+        spots.CommonFormat.Section.forEach((data, index) => {
+            const node = document.createElement("div");
+            area.appendChild(node)
+            const target = area.childNodes
+            let htmlString = ``
+            data.file.img.forEach((ele, index) => {
+                console.log(ele.text)
+                
+                htmlString += `<img class="card-img-top" src = ${ele.text} alt = "Card image cap" >`
+                console.log(htmlString)
+            })
+            let template = `<div class="card${index}" style="width: 18rem; ">
+                                ${htmlString}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                ${data.stitle} </h5>
+                                <p class="card-text" > ${data.xbody}</p>
+                                </div>
+                                </div>`
+            target[index+1].innerHTML += template 
+        })
+        
+    </script>
+
+}
+
