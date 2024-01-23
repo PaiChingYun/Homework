@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "l5CzCfVFoLkzxQfz0/ajAxrg1me58yaNEyqQJgy2goU=",
+  "Hash": "cR17vhmWvd3IpicI/LzXe84tj1XAtOLKN7qA3OBWTFA=",
   "Source": "WebApplication2",
   "BasePath": "_content/WebApplication2",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\images\\Circles.gif",
+      "SourceId": "WebApplication2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\",
+      "BasePath": "_content/WebApplication2",
+      "RelativePath": "images/Circles.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Circles.gif"
     },
     {
       "Identity": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\js\\site.js",
