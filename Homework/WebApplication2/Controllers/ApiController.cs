@@ -23,6 +23,18 @@ namespace WebApplication2.Controllers
             return Json(cities);
         }
 
+        public IActionResult Counties(string city)
+        {
+            var counties = _dbContext.Addresses.Where(a=> a.City==city).Select(a=> a.SiteId).Distinct();
+            return Json(counties);
+        }
+
+        public IActionResult Roads(string county)
+        {
+            var roads = _dbContext.Addresses.Where(a => a.SiteId == county).Select(a => a.Road).Distinct();
+            return Json(roads);
+        }
+
         public IActionResult Avatar(int id=1)
         {
             Member? member = _dbContext.Members.Find(id);
@@ -43,6 +55,23 @@ namespace WebApplication2.Controllers
         public IActionResult Address()
         {
             return View();
+        }
+
+        public IActionResult CheckAccount()
+        {
+            return View();
+        }
+
+        public IActionResult CheckAccountName(string name/*, string email, int age*/)
+        {
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    name = "guest";
+            //}
+            //return Content($"Hello {name}. You are {age} years old.!!");
+
+            var isExist = _dbContext.Members.Any(m => m.Name == name);
+            return Content(isExist.ToString());
         }
     }
 }

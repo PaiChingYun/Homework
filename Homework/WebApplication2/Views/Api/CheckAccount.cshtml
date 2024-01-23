@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "CheckAccount";
+}
+
+<h1>CheckAccount</h1>
+<form style="display:block;">
+    <label for="name">姓名：</label>
+    <input id="name" type="text" name="name" placeholder="請輸入您的姓名">
+    <label for="email">電子郵件：</label>
+    <input type="email" id="email" name="email" placeholder="請輸入您的電子郵件地址">
+    <label for="age">年齡：</label>
+    <input type="number" name="age" placeholder="請輸入您的年齡">
+    <input type="submit" value="送出">
+    <div class="alert alert-danger" id="hint"></div>
+</form>
+
+@section Scripts{
+    <script>
+        const nameNode = document.getElementById("name");
+        let parent = document.querySelector("form");
+        // console.log(parent)
+        let kids= parent.children
+        Array.from(kids).forEach((kid) => { 
+            kid.style.display="block"
+        kid.classList.add("mb-1")})
+        // console.log(nameNode);
+        nameNode.addEventListener('blur', async() => {
+            // console.log(nameNode.value)
+
+            let keyIn = nameNode.value
+            // console.log(keyIn);
+            const url = `@Url.Content("~/api/checkAccountName")?name=${keyIn}`;
+            let response = await fetch(url); 
+            console.log(response);
+            let isExist = await response.text()/* .then(data => console.log(data)); */
+            // console.log(response.text())
+            console.log(isExist)
+            if (isExist == "True") {
+                document.getElementById("hint").innerText = "此帳號已存在";
+            } else {
+                document.getElementById("hint").innerText = "此帳號可使用";
+            }
+
+            // fetch(url)
+            //     .then(response => response.text())
+            //     .then(isExist => {
+            //         isExist = isExist.trim(); // 移除空白
+            //         console.log(isExist);
+
+            //         if (isExist === "True") {
+            //             document.getElementById("hint").innerText = "此帳號已存在";
+            //         } else {
+            //             document.getElementById("hint").innerText = "此帳號可使用";
+            //         }
+            //     })
+            //     .catch(error => console.error("發生錯誤：", error));
+
+        });
+    </script>
+}

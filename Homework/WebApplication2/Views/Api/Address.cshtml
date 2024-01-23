@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="select1">
+    <option value="1">Item1</option>
+    <option value="2">Item2</option>
+    <option value="3">Item3</option>
+    <option value="4">Item4</option>
+</select>
+<select id="select2"></select>
+<select id="select3"></select>
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector("#select1");
+        const selCounty = document.querySelector("#select2");
+        const selRoad = document.querySelector("#select3");
+
+                    (async () => {
+                const response = await fetch("@Url.Content("~/api/cities")")
+                console.log(response)
+                const cities = await response.json()
+            console.log(cities)
+                const optCities = cities.map(city => `<option value="${city}">${city}</option>`)
+
+                selCity.innerHTML = optCities.join("")
+                        
+            })();
+
+        selCity.addEventListener("change", () => { 
+            let value1 = selCity.value;
+            (async () => {
+                const response = await fetch(`@Url.Content("~/api/counties")?city=${value1}`)
+                console.log(response)
+                const counties = await response.json();
+                const optCounties = counties.map(county => `<option value="${county}">${county}</option>`);
+
+                selCounty.innerHTML = optCounties.join("");
+                selRoad.innerHTML = "";
+            })()  
+        })
+
+        selCounty.addEventListener("change", () => {
+            let value2 = selCounty.value;
+            (async () => {
+                const response = await fetch(`@Url.Content("~/api/roads")?county=${value2}`)
+                console.log(response)
+                const roads = await response.json();
+                const optRoads = roads.map(road => `<option value="${road}">${road}</option>`);
+
+                selRoad.innerHTML = optRoads.join("");
+            })()
+        })
+
+        
+        
+    </script>
+}
+
