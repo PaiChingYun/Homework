@@ -72,6 +72,7 @@
         const hint = ["請輸入姓名", "請輸入信箱", "請輸入密碼", "請輸入確認密碼", "請輸入年齡"];
         let isOkay=false;
 
+
         btn.addEventListener('click',async(event) => {
             // let url = '@Url.Content("~/api/registertest")';
             // url = `${url}?Name=${txtName.value}&Age=${txtAge.value}&Email=${txtMail.value}`;
@@ -106,18 +107,30 @@
             const formData = new FormData(theForm);
             event.preventDefault(); //防止預設行為的發生
 
-            validation.forEach(async(item,index)=>{
+            for (const [index, item] of validation.entries()) {
                 if (item.value == "") {
                     document.querySelector(`#div${index + 1}`).innerText = hint[index];
                     document.querySelector(`#div${index + 1}`).classList.remove("d-none", "alert-success");
                     document.querySelector(`#div${index + 1}`).classList.add("alert-danger");
                     isOkay = false;
                     break;
-                }else{
-                    
+                } 
+                if (index == validation.length - 1) {
                     isOkay = true;
                 }
-            })
+            }
+            // validation.forEach(async(item,index)=>{
+            //     if (item.value == "") {
+            //         document.querySelector(`#div${index + 1}`).innerText = hint[index];
+            //         document.querySelector(`#div${index + 1}`).classList.remove("d-none", "alert-success");
+            //         document.querySelector(`#div${index + 1}`).classList.add("alert-danger");
+            //         isOkay = false;
+            //         break;
+            //     }else{
+                    
+            //         isOkay = true;
+            //     }
+            // })
 
             if (isOkay) { 
                 let url = '@Url.Content("~/api/register")';
