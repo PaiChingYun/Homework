@@ -26,6 +26,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\source\repos\resolution\2024.01.22\Homework\WebApplication2
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/Address.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXEFkZHJlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/CheckAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXENoZWNrQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/First.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXEZpcnN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/Spots.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXFNwb3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Homework/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXdvcmtcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

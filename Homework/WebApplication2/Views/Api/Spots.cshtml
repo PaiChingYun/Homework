@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewData["Title"] = "Spots";
+}
+
+<h1>Spots</h1>
+<div class="row">
+    <div class="col-3">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                每頁幾筆資料
+            </button>
+            <ul class="dropdown-menu">
+            </ul>
+        </div>
+    </div>
+    <div class="col-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            </ul>
+        </nav>
+
+    </div>
+    <div class="col-2">
+        <div class="dropdown" id="dropdown2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                景點編號排序
+            </button>
+            <ul class="dropdown-menu" id="dropdownMenu2">
+            </ul>
+        </div>
+    </div>
+    <div class="col-3">
+        <input type="search" id="inputKeyword" class="form-control" placeholder="景點搜尋" />
+    </div>
+</div>
+
+<div class="mt-0">
+    <nav aria-label="...">
+        <ul class="pagination pagination-lg" id="categories">
+        </ul>
+    </nav>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4" id="spots"></div>
+
+@section Scripts{
+    <script>
+        const searchData = {
+            "categoryId": 8,
+          "keyword": "",
+            "page": 1,
+                "pageSize": 9,
+                    "sortType": "asc",
+                        "sortBy": ""
+        }
+
+        const loadSpots = async () => {
+            const response = await fetch("@Url.Content("~/api/spots")", {
+                method: "POST",
+                body: JSON.stringify(searchData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+                const ulPaging = document.querySelector('.pagination');
+                const datas = await response.json();
+                const divSpots = document.getElementById("spots");
+
+                //產生分頁按鈕
+                let liPaging = "";
+                for (let i = 1, max = datas.totalPages; i <= max; i++) {
+                    liPaging += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`;
+                }
+                ulPaging.innerHTML = liPaging;
+
+            
+                
+                const cardSpots = datas.spotsResult.map(spot => {
+                    const { spotId, spotTitle, spotDescription, spotImage, address } = spot;
+                    return (
+                        `
+                                         <div class="col">
+                            <div class="card h-100">
+                                                <img src="${spotImage}" class="card-img-top" alt="${spotTitle}">
+                                <div class="card-body">
+                                                    <h5 class="card-title">${spotId} - ${spotTitle}</h5>
+                                                            <p class="card-text">${spotDescription.length <= 100 ? spotDescription : spotDescription.substring(0, 100)}...</p>
+                                </div>
+                                <div class="card-footer">
+                                            <small class="text-body-secondary">${address}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                                `
+                    )
+                });
+
+                divSpots.innerHTML = cardSpots.join("");
+        }
+
+            const inpKeyword = document.querySelector('#inputKeyword');
+        inpKeyword.addEventListener("keydown", event => {
+            if (event.which === 13) {
+                searchData.keyword = event.target.value;
+                searchData.page = 1;
+                loadSpots();
+            }
+        })
+            //分頁
+            const pagingHandler = (page) => {
+                searchData.page = page;
+                loadSpots();
+            }
+
+            // 一頁幾筆資料
+        const dropdown = document.querySelector(".dropdown");
+        const dropdownMenu = document.querySelector(".dropdown-menu");
+        const pageSizeHandler = (size) => {
+            searchData.pageSize = size;
+            dropdown.childNodes[1].textContent=`每頁 ${size} 筆資料`
+            loadSpots();
+        };
+        dropdown.childNodes[1].addEventListener("click", () => {
+            for (let i = 9; i > 0; i--) {
+                    dropdownMenu.innerHTML += `<li><a class="dropdown-item" onclick="pageSizeHandler(${i})">每頁 ${i} 筆資料</a></li>`
+            }
+        })
+
+        // 依分類搜尋
+        const categories = document.getElementById("categories");
+        const loadCategories = async () => {
+            const response = await fetch("@Url.Content("~/api/categories")");
+            const data = await response.json();
+            console.log(data);
+            data.forEach((item, index) => {
+                categories.innerHTML += `<li class="page-item" onclick="sortingHandler(${index})"><a class="page-link" href="#">${item}</a></li>`;
+            });
+        }
+
+        // 排序
+        const dropdown2 = document.querySelector("#dropdown2");
+        const dropdownMenu2 = document.querySelector("#dropdownMenu2");
+        const orderName = ["升冪", "降冪"];
+        const order = ["asc","desc" ];
+        function orderingHandler(num) {
+            console.log(num)
+            searchData.sortType = order[num];
+            dropdown2.childNodes[1].textContent = `景點編號${orderName[num]}`
+            loadSpots();
+        }
+        dropdownMenu2.innerHTML += `<li><a class="dropdown-item" onclick="orderingHandler(0)">景點編號升冪</a></li><li><a class="dropdown-item" onclick="orderingHandler(1)">景點編號降冪</a></li>`
+
+        loadCategories();
+        loadSpots();
+
+        function sortingHandler(num){
+            searchData.categoryId = num+1;
+            loadSpots();
+        }
+    </script>
+}

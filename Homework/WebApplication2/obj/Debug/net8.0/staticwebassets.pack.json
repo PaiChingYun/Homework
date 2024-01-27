@@ -13,8 +13,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\haha\\empty.jpg",
+      "PackagePath": "staticwebassets\\haha\\empty.jpg"
+    },
+    {
+      "Id": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\images\\200w.gif",
+      "PackagePath": "staticwebassets\\images\\200w.gif"
+    },
+    {
       "Id": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\images\\Circles.gif",
       "PackagePath": "staticwebassets\\images\\Circles.gif"
+    },
+    {
+      "Id": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\images\\empty.jpg",
+      "PackagePath": "staticwebassets\\images\\empty.jpg"
     },
     {
       "Id": "D:\\source\\repos\\resolution\\2024.01.22\\Homework\\WebApplication2\\wwwroot\\js\\site.js",

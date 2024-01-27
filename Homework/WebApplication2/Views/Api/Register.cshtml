@@ -1,0 +1,298 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form id="userForm">
+            <div class="mb-3">
+                <label for="userName" class="form-label">姓名：</label>
+                <input type="text" class="form-control" id="userName" name="Name">
+                <div class="alert alert-danger d-none" id="div1"></div>
+            </div>
+            <div class="mb-3">
+                <label for="UserEmail" class="form-label">電子郵件：</label>
+                <input type="email" class="form-control" id="UserEmail" name="Email">
+                <div class="alert alert-danger d-none" id="div2"></div>
+            </div>
+            <div class="mb-3">
+                <label for="UserPassword" class="form-label">密碼：</label>
+                <input type="password" class="form-control" id="UserPassword" name="Password">
+                <div class="alert alert-danger d-none" id="div3"></div>
+            </div>
+            <div class="mb-3">
+                <label for="UserCheckPassword" class="form-label">確認密碼：</label>
+                <input type="password" class="form-control" id="UserCheckPassword" name="CheckPassword">
+                <div class="alert alert-danger d-none" id="div4"></div>
+            </div>
+            <div class="mb-3">
+                <label for="userAge" class="form-label">年紀：</label>
+                <input type="number" class="form-control" id="userAge" name="Age">
+                <div class="alert alert-danger d-none" id="div5"></div>
+            </div>
+            <div class="mb-3">
+                <label for="userAvatar" class="custom-file-label">頭像：</label>
+                <input type="file" class="custom-file-input" id="userAvatar" name="avatar">
+            </div>
+
+            <button id="button1" type="submit" class="btn btn-primary">送出</button>
+            <div class="alert alert-info d-none" id="div6"></div>
+        </form>
+        
+    </div>
+    <div class="col-3">
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        
+        // (async () => {
+        //     var response = await fetch`@Url.Content("~/api/registerTest")?name=Tom&age=20&email=tom@gmail.com`;
+        //     let text = await response.text();
+        //     console.log(text);
+        // })()
+
+        const btn = document.querySelector('#button1');
+        const userName = document.querySelector('#userName');
+        const userAge = document.querySelector('#userAge');
+        const userEmail = document.querySelector('#UserEmail');
+        const userPassword = document.querySelector("#UserPassword");
+        const userCheckPassword = document.querySelector("#UserCheckPassword");
+        const div1 = document.querySelector('#div1');
+        const div2 = document.querySelector('#div2');
+        const div5 = document.querySelector('#div5');
+        const div6 = document.getElementById("div6");
+        const theForm = document.querySelector("#userForm");
+        const validation = [userName, userEmail, userPassword, UserCheckPassword,userAge];
+        const hint = ["請輸入姓名", "請輸入信箱", "請輸入密碼", "請輸入確認密碼", "請輸入年齡"];
+        let isOkay=false;
+
+        btn.addEventListener('click',async(event) => {
+            // let url = '@Url.Content("~/api/registertest")';
+            // url = `${url}?Name=${txtName.value}&Age=${txtAge.value}&Email=${txtMail.value}`;
+            // const response = await fetch(url);
+            // const data = await response.text();
+            // theDiv.innerHTML = data;
+
+            
+            // formData.append("city", "中壢");
+            // for (const pair of formData.entries()) {
+            //     console.log(pair[0]);
+            //     console.log(pair[1]); 
+            // }
+
+            // if (userAge.value == "") {
+            //     div5.innerText = "請輸入年齡";
+            //     div5.classList.remove("d-none")
+            // }
+
+            // if (userName.value == "") {
+            //     div1.innerText = "請輸入姓名";
+            //     div1.classList.remove("d-none", "alert-success");
+            //     div1.classList.add("alert-danger");
+            // }
+
+            // if (userEmail.value == "") {
+            //     div2.innerText = "請輸入信箱";
+            //     div2.classList.remove("d-none", "alert-success");
+            //     div2.classList.add("alert-danger");
+            // }
+
+            const formData = new FormData(theForm);
+            event.preventDefault(); //防止預設行為的發生
+
+            validation.forEach(async(item,index)=>{
+                if (item.value == "") {
+                    document.querySelector(`#div${index + 1}`).innerText = hint[index];
+                    document.querySelector(`#div${index + 1}`).classList.remove("d-none", "alert-success");
+                    document.querySelector(`#div${index + 1}`).classList.add("alert-danger");
+                    isOkay = false;
+                    break;
+                }else{
+                    
+                    isOkay = true;
+                }
+            })
+
+            if (isOkay) { 
+                let url = '@Url.Content("~/api/register")';
+                let response = await fetch(url, {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await response.text();
+                div6.innerText = data;
+                div6.classList.remove("d-none");
+                console.log(data);
+            }
+
+            // switch ("") {
+            //     case userAge.value:
+            //         div5.innerText = "請輸入年齡";
+            //         div5.classList.remove("d-none");
+            //         break;
+
+            //     case userName.value:
+            //         div1.innerText = "請輸入姓名";
+            //         div1.classList.remove("d-none", "alert-success");
+            //         div1.classList.add("alert-danger");
+            //         break;
+
+            //     case userEmail.value:
+            //         div2.innerText = "請輸入信箱";
+            //         div2.classList.remove("d-none", "alert-success");
+            //         div2.classList.add("alert-danger");
+            //         break;
+
+            //     default:
+            //         let url = '@Url.Content("~/api/register")';
+            //         let response = await fetch(url, {
+            //             method: "POST",
+            //             body: formData
+            //         });
+            //         const data = await response.text();
+            //         div6.innerText = data;
+
+            // }
+
+            
+        })
+
+        userName.addEventListener("keyup", async() => {
+            let checkName = `@Url.Content("~/api/CheckAccountName")?name=${userName.value}`;
+            let responseName = await fetch(checkName);
+            let isExist = await responseName.text();
+            if (isExist == "True") {
+                div1.innerText = "此帳號已存在";
+                div1.classList.remove("d-none", "alert-success");
+                div1.classList.add("alert-danger");
+                //停用按鈕
+                btn.setAttribute('disabled', 'disabled');
+
+            } else {
+                if (userName.value == "") {
+                    div1.innerText = "請輸入姓名";
+                    div1.classList.remove("d-none", "alert-success");
+                    div1.classList.add("alert-danger");
+                    //停用按鈕
+                    btn.setAttribute('disabled', 'disabled');
+                } else {
+                    div1.innerText = "此帳號可使用";
+                    div1.classList.remove("d-none", "alert-danger");
+                    div1.classList.add("alert-success");
+                    //啟用按鈕
+                    btn.removeAttribute('disabled');
+                }
+            }
+        })
+
+        userEmail.addEventListener("keyup", async () => {
+            let checkEmail = `@Url.Content("~/api/Checkemail")?email=${userEmail.value}`;
+            let responseEmail = await fetch(checkEmail);
+            let isExist = await responseEmail.text();
+            if (isExist == "True") {
+                div2.innerText = "此信箱已存在";
+                div2.classList.remove("d-none", "alert-success")
+                div2.classList.add("alert-danger");
+                //停用按鈕
+                btn.setAttribute('disabled', 'disabled');
+            } else {
+                if (userEmail.value == "") {
+                    div2.innerText = "請輸入信箱";
+                    div2.classList.remove("d-none", "alert-success");
+                    div2.classList.add("alert-danger");
+                    //停用按鈕
+                    btn.setAttribute('disabled', 'disabled');
+                } else {
+                    div2.innerText = "此信箱可使用";
+                    div2.classList.remove("d-none", "alert-danger");
+                    div2.classList.add("alert-success");
+                    //啟用按鈕
+                    btn.removeAttribute('disabled');
+                }
+            }
+        })
+
+        userAge.addEventListener("keyup", () => {
+            if (userAge.value == "") {
+                div5.innerText = "請輸入年齡";
+                div5.classList.remove("d-none", "alert-success");
+                div5.classList.add("alert-danger");
+                //停用按鈕
+                btn.setAttribute('disabled', 'disabled');
+            } else {
+                div5.classList.add("d-none");
+                //啟用按鈕
+                btn.removeAttribute('disabled');
+            }
+        })
+
+        userPassword.addEventListener("keyup", async() => {
+            if (userPassword.value == "") {
+                div3.innerText = "請輸入密碼";
+                div3.classList.remove("d-none", "alert-success");
+                div3.classList.add("alert-danger");
+                //停用按鈕
+                btn.setAttribute('disabled', 'disabled');
+            } else {
+                if (userCheckPassword.value == "") {
+                    div3.classList.add("d-none");
+                    //啟用按鈕
+                    btn.removeAttribute('disabled');
+                } else {
+                    if (userPassword.value == userCheckPassword.value) {
+                        div3.classList.add("d-none");
+                        div4.classList.add("d-none");
+                        //啟用按鈕
+                        btn.removeAttribute('disabled');
+                    } else {
+                        div4.innerText = "確認密碼需與密碼一致";
+                        div4.classList.remove("d-none", "alert-success");
+                        div4.classList.add("alert-danger");
+                        //停用按鈕
+                        btn.setAttribute('disabled', 'disabled');
+                    }
+                }
+
+                
+            }
+        })
+
+        userCheckPassword.addEventListener("keyup", async () => {
+            if (userCheckPassword.value == "") {
+                div4.innerText = "請輸入確認密碼";
+                div4.classList.remove("d-none", "alert-success");
+                div4.classList.add("alert-danger");
+                //停用按鈕
+                btn.setAttribute('disabled', 'disabled');
+            } else {
+                if (userPassword.value == "") {
+                    div4.classList.add("d-none");
+                    //啟用按鈕
+                    btn.removeAttribute('disabled');
+                } else {
+                    if (userPassword.value == userCheckPassword.value) {
+                        div3.classList.add("d-none");
+                        div4.classList.add("d-none");
+                        //啟用按鈕
+                        btn.removeAttribute('disabled');
+                    } else {
+                        div4.innerText = "確認密碼需與密碼一致";
+                        div4.classList.remove("d-none", "alert-success");
+                        div4.classList.add("alert-danger");
+                        //停用按鈕
+                        btn.setAttribute('disabled', 'disabled');
+                    }
+                }
+
+
+            }
+        })
+        
+    </script>
+}

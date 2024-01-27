@@ -38,8 +38,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXEZpcnN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Api/Spots.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpXFNwb3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Homework/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXdvcmtcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Home/AutoComplete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBdXRvQ29tcGxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Home/Index.cshtml]
@@ -48,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Home/Test.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/source/repos/resolution/2024.01.22/Homework/WebApplication2/Views/Shared/Error.cshtml]
